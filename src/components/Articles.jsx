@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import LikeArticle from "./LikeArticle";
 import { Link } from "react-router-dom";
 
+
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [user] = useAuthState(auth);

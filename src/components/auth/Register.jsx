@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -13,22 +14,24 @@ export default function Register() {
 
   const handleSignup = async () => {
     try {
-      if(password.length >= 6){
+      if(password.length >= 8){
         if(cpassword === password){
           await createUserWithEmailAndPassword(auth, email, password);
           updateProfile(auth.currentUser, { displayName: name });
           navigate("/");
         }else{
-          alert("Passwords are not same!");
+          toast("Passwords must be same!", { type: "error" });
         }
       }
       else{
-        alert("Password must contain at least 6 characthers!")
+        toast("Password must contain at least 8 characthers!", { type: "error" });
       }
     } catch (error) {
       toast(error.code, { type: "error" });
     }
   };
+
+
   return (
     <div className="border p-3 bg-light " style={{ marginTop: 70 }}>
       <h1>Register</h1>
@@ -79,6 +82,11 @@ export default function Register() {
       <button className="btn btn-primary" onClick={handleSignup}>
         Register
       </button>
+      <br></br>
+      <br></br>
+      <Link className="nav-link" to="/signin">
+        Do you already have an account?{" "}
+      </Link>
     </div>
   );
 }

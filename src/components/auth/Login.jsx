@@ -1,8 +1,10 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, updateCurrentUser } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "./../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { signInWithGoogle } from '../../firebaseConfig.js'
+import { Link } from "react-router-dom";
 
 export default function Login() {
   let navigate = useNavigate();
@@ -17,6 +19,16 @@ export default function Login() {
       toast(error.code, { type: "error" });
     }
   };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+      navigate("/");
+    } catch (error) {
+      toast(error.code, { type: "error" });
+    }
+  };
+
   return (
     <div className="border p-3 bg-light mx-auto"
     style={{maxWidth:400, marginTop:60}}
@@ -49,6 +61,17 @@ export default function Login() {
       <button className="btn btn-primary" onClick={handleLogin}>
         Login
       </button>
+      <br></br>
+      <br></br>
+      <button className="btn btn-primary black" onClick={handleGoogleLogin}>
+        Sign In With Google
+      </button>
+      <br></br>
+      <br></br>
+      <Link className="nav-link" to="/register">
+        Don't you have an account?{" "}
+      </Link>
+
     </div>
   );
 }
