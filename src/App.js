@@ -5,9 +5,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Article from "./components/Article";
+
 function App() {
   return (
-    <div className="container">
+    <div className="container main-container">
       <Router>
         <Routes>
           <Route path="/register" element={<Register />} />
@@ -17,7 +18,7 @@ function App() {
             path="/"
             element={
               <div className="row mt-5">
-                <div className="col-md-8">
+                <div className="col-md-8 articles-col">
                   <Articles />
                 </div>
                 <div className="col-md-4">

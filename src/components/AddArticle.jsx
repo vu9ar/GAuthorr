@@ -81,7 +81,7 @@ export default function AddArticle() {
   };
 
   return (
-    <div className="border p-3 mt-3 bg-light" style={{ position: "fixed" }}>
+    <div className="add-article border p-3 mt-3 bg-light">
       {!user ? (
         <>
           <h2>
